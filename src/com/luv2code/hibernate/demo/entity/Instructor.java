@@ -1,0 +1,141 @@
+package com.luv2code.hibernate.demo.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="instructor")				// annotation the class as an entity and map to db table
+public class Instructor {
+	
+	// define the fields
+
+	// annotate the fields with db column names	
+	// **set up mapping to InstructorDetail entity
+	
+	// create constuctors
+	
+	// generate getter/setter methods
+	
+	// generate toString() method
+	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+	
+	@Column(name="first_name")
+	private String firstName;
+	
+	@Column(name="last_name")
+	private String lastName;
+	
+	@Column(name="email")
+	private String email;
+	
+	@OneToOne(cascade=CascadeType.ALL)			// 관계이다.(CascadeType : 부모 객체의 상태에 따라 자식 객체를 어찌 처리할 지에 대한 옵션이다. Instructor가 Insert,Delete 되면  Instructor에 포함된 InstructorDetail도 자동으로 Insert,Delete 되게 하기 위해서 CascadeType.ALL을 설정함)
+	@JoinColumn(name="instructor_detail_id")	// 여기에 현재 Entity에서 관계할 Entity에 매핑할 키 값을 정의함.
+	private InstructorDetail instructorDetail;
+	
+	
+	public Instructor() {
+		
+	}
+
+	public Instructor(String firstName, String lastName, String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public InstructorDetail getInstructorDetail() {
+		return instructorDetail;
+	}
+
+	public void setInstructorDetail(InstructorDetail instructorDetail) {
+		this.instructorDetail = instructorDetail;
+	}
+
+	@Override
+	public String toString() {
+		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", instructorDetail=" + instructorDetail + "]";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
