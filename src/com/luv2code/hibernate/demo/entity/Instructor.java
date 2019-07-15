@@ -1,5 +1,8 @@
 package com.luv2code.hibernate.demo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,6 +47,11 @@ public class Instructor {
 	@OneToOne(cascade=CascadeType.ALL)			// 관계이다.(CascadeType : 부모 객체의 상태에 따라 자식 객체를 어찌 처리할 지에 대한 옵션이다. Instructor가 Insert,Delete 되면  Instructor에 포함된 InstructorDetail도 자동으로 Insert,Delete 되게 하기 위해서 CascadeType.ALL을 설정함)
 	@JoinColumn(name="instructor_detail_id")	// 여기에 현재 Entity에서 관계할 Entity에 매핑할 키 값을 정의함.
 	private InstructorDetail instructorDetail;
+	
+	@OneToMany(mappedBy="instructor",
+				cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Course> courses;
 	
 	
 	public Instructor() {
@@ -100,10 +109,28 @@ public class Instructor {
 		return "Instructor [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", instructorDetail=" + instructorDetail + "]";
 	}
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
 	
 	
+	// add convenience methods for bi-directional relationship
 	
-	
+	public void add(Course tempCourse) {
+		
+		if(courses == null) {
+			courses = new ArrayList<>();
+		}
+		
+		courses.add(tempCourse);
+		
+		tempCourse.setInstructor(this);
+	}
 	
 	
 	
