@@ -41,12 +41,21 @@ public class CreateDemo {
 			// commit transaction
 			
 			
+
 			
+			/*
 			Instructor tempInstructor =
 					new Instructor("hojin", "chu", "hojinchu99@gmail.com");
 			
 			InstructorDetail tempInstructorDetail = 
 					new InstructorDetail("http://www.youtube.com/chjin", "Love 2 Code!!!");
+			*/
+			
+			Instructor tempInstructor =
+					new Instructor("Madhu", "Patel", "madhu@luv2code.com");
+			
+			InstructorDetail tempInstructorDetail = 
+					new InstructorDetail("http://www.youtube.com", "Guitar");			
 			
 			tempInstructor.setInstructorDetail(tempInstructorDetail);
 			
