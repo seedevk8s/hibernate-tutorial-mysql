@@ -62,11 +62,19 @@ public class AddCoursesForMaryDemo {
 			System.out.println("\nLoaded student: " + tempStudent);
 			System.out.println("Courses: " + tempStudent.getCourses());
 			
-			// create more courses
+			// create more courses => 메모리에 저장
+			Course tempCourse1 = new Course("Rubik's Cube - How to Speed Cube");
+			Course tempCourse2 = new Course("Atari 2600 - Game Development");
 			
-			// add student to courses
+			// add student to courses => 메모리에 저장
+			tempCourse1.addStudent(tempStudent);
+			tempCourse2.addStudent(tempStudent);
 			
-			// save the courses
+			// save the courses => 각 해당 DB에 물리적으로 저장
+			System.out.println("\nSaving the courses ...");
+			
+			session.save(tempCourse1);
+			session.save(tempCourse2);
 			
 			
 			session.getTransaction().commit();
